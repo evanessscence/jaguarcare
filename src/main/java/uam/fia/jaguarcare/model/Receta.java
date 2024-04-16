@@ -3,8 +3,6 @@ package uam.fia.jaguarcare.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,9 +10,8 @@ import java.util.List;
 
 @Entity
 @Data
-public class Visita {
+public class Receta {
     @Id
-    @Column(nullable = false, updatable = false)
     @SequenceGenerator(
             name = "primary_sequence",
             sequenceName = "primary_sequence",
@@ -26,26 +23,19 @@ public class Visita {
             generator = "primary_sequence"
     )
     private Integer id;
-
-    private LocalDate fecha;
-
-    private LocalTime horadeEntrada;
+    private String diagnostico;
+    private Integer cantDispensada;
+    private Integer visita_id;
 
     @PrePersist
     public void createdAt()
     {
-        this.fecha = LocalDate.now();
-        this.horadeEntrada = LocalTime.now();
-        this.horadeSalida = LocalTime.now();
-        this.receta_id = this.id;
+        this.visita_id = this.id;
     }
 
-    private LocalTime horadeSalida;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "visitante_id")
+    @JoinColumn(name = "medicamento_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Visitante visitante;
+    private Medicamento medicamento;
 
-    private Integer receta_id;
 }
