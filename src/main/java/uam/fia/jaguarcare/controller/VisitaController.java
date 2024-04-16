@@ -18,8 +18,6 @@ public class VisitaController {
 
     @Autowired
     private IVisitaService visitaService;
-    @Autowired
-    private IVisitanteService visitanteService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Visita>> getAll()

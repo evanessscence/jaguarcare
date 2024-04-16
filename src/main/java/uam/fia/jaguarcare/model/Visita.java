@@ -1,5 +1,6 @@
 package uam.fia.jaguarcare.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -17,7 +18,7 @@ public class Visita {
             name = "primary_sequence",
             sequenceName = "primary_sequence",
             allocationSize = 1,
-            initialValue = 1
+            initialValue = 1000
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -40,7 +41,8 @@ public class Visita {
     private LocalTime horadeSalida;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cifID")
+    @JoinColumn(name = "visitante_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Visitante visitante;
 
 
