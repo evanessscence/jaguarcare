@@ -13,29 +13,25 @@ import java.util.List;
 public class Receta {
     @Id
     @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
+            name = "receta_sequence",
+            sequenceName = "receta_sequence",
             allocationSize = 1,
             initialValue = 1000
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
+            generator = "receta_sequence"
     )
     private Integer id;
     private String diagnostico;
     private Integer cantDispensada;
-    private Integer visita_id;
 
-    @PrePersist
-    public void createdAt()
-    {
-        this.visita_id = this.id;
-    }
+    @OneToOne
+    @JoinColumn(name = "visita_id")
+    private Visita visita; // Visita no se genera automáticamente con el pre-persist :(
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medicamento_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receta")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Medicamento medicamento;
+    private List<Medicamento> medicamentos;
 
 }

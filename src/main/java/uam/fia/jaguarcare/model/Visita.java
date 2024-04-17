@@ -14,16 +14,15 @@ import java.util.List;
 @Data
 public class Visita {
     @Id
-    @Column(nullable = false, updatable = false)
     @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
+            name = "visita_sequence",
+            sequenceName = "visita_sequence",
             allocationSize = 1,
             initialValue = 1000
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
+            generator = "visita_sequence"
     )
     private Integer id;
 
@@ -37,7 +36,6 @@ public class Visita {
         this.fecha = LocalDate.now();
         this.horadeEntrada = LocalTime.now();
         this.horadeSalida = LocalTime.now();
-        this.receta_id = this.id;
     }
 
     private LocalTime horadeSalida;
@@ -47,5 +45,4 @@ public class Visita {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Visitante visitante;
 
-    private Integer receta_id;
 }

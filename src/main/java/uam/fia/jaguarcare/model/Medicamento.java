@@ -12,14 +12,14 @@ public class Medicamento {
 
     @Id
     @SequenceGenerator(
-            name = "primary_sequence",
-            sequenceName = "primary_sequence",
+            name = "med_sequence",
+            sequenceName = "med_sequence",
             allocationSize = 1,
             initialValue = 1000
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "primary_sequence"
+            generator = "med_sequence"
     )
     private Integer id;
     private String nombreComercial;
@@ -27,6 +27,8 @@ public class Medicamento {
     private String dosis;
     private PresentacionMedicamento presentacionMedicamento;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "id")
-    List<Receta> recetas;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receta_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Receta receta;
 }

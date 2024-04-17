@@ -5,3 +5,4 @@ GO
 
 USE JaguarCare
 CREATE USER APPUSER FOR LOGIN APPLOG;
+EXEC sp_addrolemember 'db_owner', 'APPUSER';
