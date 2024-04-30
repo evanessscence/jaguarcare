@@ -28,7 +28,10 @@ public class Medicamento {
     private PresentacionMedicamento presentacionMedicamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receta_id")
+    @JoinColumn(name = "visita_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Receta receta;
+    private Visita visita;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "medicamento")
+    private List<Compra> compra;
 }

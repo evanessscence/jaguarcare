@@ -22,7 +22,7 @@ public class Visitante {
 
     private String telefono;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "id")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "visitante",cascade = CascadeType.ALL)
     List<Visita> visitas;
 
 }

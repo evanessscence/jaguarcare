@@ -3,6 +3,7 @@ package uam.fia.jaguarcare.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uam.fia.jaguarcare.dto.VisitanteDTO;
 import uam.fia.jaguarcare.model.Visitante;
 import uam.fia.jaguarcare.service.IVisitanteService;
 

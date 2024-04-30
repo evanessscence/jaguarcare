@@ -2,6 +2,7 @@ package uam.fia.jaguarcare.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uam.fia.jaguarcare.dto.VisitanteDTO;
 import uam.fia.jaguarcare.model.Visitante;
 import uam.fia.jaguarcare.repository.IVisitanteRepository;
 
@@ -20,8 +21,7 @@ public class VisitanteService implements IVisitanteService {
     }
 
     @Override
-    public void create(Visitante visita) {
-        visitanteRepository.save(visita);
+    public void create(Visitante visita) {visitanteRepository.save(visita);
     }
 
     @Override

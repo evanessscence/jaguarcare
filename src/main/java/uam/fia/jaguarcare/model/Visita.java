@@ -45,4 +45,19 @@ public class Visita {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Visitante visitante;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Usuario usuario;
+
+    private String diagnostico;
+    private Integer cantDispensada;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "visita")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Medicamento> medicamentos;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "sintomatologia_id")
+    private Sintomatologia sintomatologia;
 }
