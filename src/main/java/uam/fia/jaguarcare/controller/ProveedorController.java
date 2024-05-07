@@ -1,13 +1,19 @@
 package uam.fia.jaguarcare.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import uam.fia.jaguarcare.model.Proveedor;
 import uam.fia.jaguarcare.service.IProveedorService;
 import uam.fia.jaguarcare.service.IVisitaService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/proveedor")
@@ -29,7 +35,7 @@ public class ProveedorController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody Proveedor modelo) // Crea un servicio que inserta usuarios
+    public ResponseEntity<String> create(@RequestBody @Valid Proveedor modelo) // Crea un servicio que inserta usuarios
     {
 
         proveedorService.create(modelo);
@@ -37,7 +43,7 @@ public class ProveedorController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Proveedor modelo)
+    public ResponseEntity<String> update(@RequestBody @Valid Proveedor modelo)
     {
         proveedorService.create(modelo);
         return ResponseEntity.ok("Datos de proveedor actualizados");
@@ -50,5 +56,16 @@ public class ProveedorController {
         return ResponseEntity.ok("Proveedor eliminado");
     }
 
-
+    //Bean Validation
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String,String> handleValidationException(MethodArgumentNotValidException exception){
+        Map<String,String> errors = new HashMap<>();
+        exception.getBindingResult().getAllErrors().forEach((error) ->{
+            String fieldName = ((FieldError)error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName,errorMessage);
+        });
+        return errors;
+    }
 }

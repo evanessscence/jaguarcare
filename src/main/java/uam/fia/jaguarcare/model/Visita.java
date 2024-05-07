@@ -1,5 +1,6 @@
 package uam.fia.jaguarcare.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class Visita {
 
     private LocalDate fecha;
 
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime horadeEntrada;
 
     @PrePersist
@@ -38,6 +40,7 @@ public class Visita {
         this.horadeSalida = LocalTime.now();
     }
 
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private LocalTime horadeSalida;
 
     @ManyToOne(fetch = FetchType.LAZY)

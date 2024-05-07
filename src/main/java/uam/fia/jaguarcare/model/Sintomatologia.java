@@ -2,6 +2,7 @@ package uam.fia.jaguarcare.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.Collection;
@@ -22,6 +23,8 @@ public class Sintomatologia {
             generator = "sintoma_sequence"
     )
     private Integer Id;
+
+    @NotBlank(message = "El nombre de la sintomatología no puede estar vacío")
     private String nombre;
 
     @OneToMany(mappedBy="sintomatologia")

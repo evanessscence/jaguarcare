@@ -2,6 +2,7 @@ package uam.fia.jaguarcare.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.List;
@@ -22,9 +23,17 @@ public class Medicamento {
             generator = "med_sequence"
     )
     private Integer id;
+
+    @NotBlank(message = "El nombre comercial no puede estar en blanco")
     private String nombreComercial;
+
+    @NotBlank(message = "El nombre genérico no puede estar en blanco")
     private String nombreGenerico;
+
+    @NotBlank(message = "La dosis no puede estar en blanco")
     private String dosis;
+
+    @NotNull(message = "La presentación del medicamento debe ser ingresada")
     private PresentacionMedicamento presentacionMedicamento;
 
     @ManyToOne(fetch = FetchType.LAZY)
