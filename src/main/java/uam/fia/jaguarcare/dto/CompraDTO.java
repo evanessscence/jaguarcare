@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 @Data
 public class CompraDTO {
-    private Integer id;
+    private Integer NumeroDeFactura;
     private LocalDate fecha;
     private List<MedicamentoDTO> medicamento;
     private ProveedorDTO proveedor;

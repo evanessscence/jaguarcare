@@ -13,7 +13,7 @@ import lombok.*;
 @Data
 public class Compra{
 	@Id
-	private Integer id;
+	private Integer NumeroDeFactura;
 
 	@NotNull(message = "La fecha no puede estar vacia")
 	private LocalDate fecha;
