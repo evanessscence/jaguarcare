@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import java.util.Date;
 
 import java.util.List;
 
@@ -35,6 +36,22 @@ public class Medicamento {
 
     @NotNull(message = "La presentación del medicamento debe ser ingresada")
     private PresentacionMedicamento presentacionMedicamento;
+
+    @NotNull(message = "La fecha de lote no puede estar vacia")
+    @PastOrPresent(message = "La fecha de lote debe ser en el pasado o presente")
+    private String lote;
+
+    @NotNull(message = "La fecha de vencimiento no puede estar vacia")
+    @Future(message = "La fecha de vencimiento debe ser en el futuro")
+    private Date vencimiento;
+
+    @NotBlank(message = "La presentación no puede estar en blanco")
+    private String presentacion;
+
+    private String indicaciones;
+
+    @NotNull
+    private Integer cantidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "visita_id")

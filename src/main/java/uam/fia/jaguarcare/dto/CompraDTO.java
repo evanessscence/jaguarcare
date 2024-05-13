@@ -12,10 +12,5 @@ public class CompraDTO {
     private Integer id;
     private LocalDate fecha;
     private List<MedicamentoDTO> medicamento;
-    private Date lote;
-    private Date vencimiento;
-    private String presentacion;
-    private String indicaciones;
-    private int cantidad;
     private ProveedorDTO proveedor;
 }
