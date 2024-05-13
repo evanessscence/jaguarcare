@@ -36,7 +36,6 @@ public class Visita {
     public void createdAt()
     {
         this.fecha = LocalDate.now();
-        this.horadeEntrada = LocalTime.now();
         this.horadeSalida = LocalTime.now();
     }
 
