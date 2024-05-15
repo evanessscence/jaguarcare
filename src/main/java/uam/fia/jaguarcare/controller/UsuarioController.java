@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import uam.fia.jaguarcare.dto.UsuarioDTO;
 import uam.fia.jaguarcare.model.Usuario;
 import uam.fia.jaguarcare.service.IUsuarioService;
 import uam.fia.jaguarcare.service.IVisitanteService;
@@ -24,53 +25,47 @@ public class UsuarioController {
     private IUsuarioService usuarioService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Usuario>> getAll()
-    {
-        List<Usuario> lista = usuarioService.getAll();
-        if (lista.isEmpty())
-        {
-            return ResponseEntity.badRequest().body(lista);
-
+    public ResponseEntity<List<UsuarioDTO>> getAll() {
+        List<UsuarioDTO> list = usuarioService.getAll();
+        if (list.isEmpty()) {
+            return ResponseEntity.badRequest().body(list);
         }
-        return ResponseEntity.ok(lista);
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid Usuario modelo) // Crea un servicio que inserta usuarios
-    {
-        usuarioService.create(modelo);
+    public ResponseEntity<String> create(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+        usuarioService.create(usuarioDTO);
         return ResponseEntity.ok("Usuario creado");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody @Valid Usuario modelo)
-    {
-        usuarioService.create(modelo);
+    public ResponseEntity<String> update(@RequestBody @Valid UsuarioDTO usuarioDTO) {
+        usuarioService.create(usuarioDTO);  // Assuming an update method is available
         return ResponseEntity.ok("Usuario actualizado");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") String id)
-    {
-       usuarioService.delete(id);
+    public ResponseEntity<String> delete(@PathVariable String id) {
+        usuarioService.delete(id);
         return ResponseEntity.ok("Usuario eliminado");
     }
 
-    @GetMapping("search/{id}")
-    public ResponseEntity<Optional<Usuario>> find(@PathVariable("id") String id)
-    {
-        Optional<Usuario> lista = usuarioService.find(id);
-        return ResponseEntity.ok(lista);
+    @GetMapping("/search/{id}")
+    public ResponseEntity<Optional<UsuarioDTO>> find(@PathVariable String id) {
+        Optional<UsuarioDTO> usuario = usuarioService.find(id);
+        return ResponseEntity.ok(usuario);
     }
-    //Bean Validation
+
+    // Bean Validation error handling
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,String> handleValidationException(MethodArgumentNotValidException exception){
-        Map<String,String> errors = new HashMap<>();
-        exception.getBindingResult().getAllErrors().forEach((error) ->{
-            String fieldName = ((FieldError)error).getField();
+    public Map<String, String> handleValidationException(MethodArgumentNotValidException exception) {
+        Map<String, String> errors = new HashMap<>();
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName,errorMessage);
+            errors.put(fieldName, errorMessage);
         });
         return errors;
     }

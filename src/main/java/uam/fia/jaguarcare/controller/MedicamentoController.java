@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import uam.fia.jaguarcare.model.Medicamento;
-import uam.fia.jaguarcare.model.Medicamento;
+import uam.fia.jaguarcare.dto.MedicamentoDTO;
+import uam.fia.jaguarcare.dto.ProveedorDTO;
 import uam.fia.jaguarcare.service.IMedicamentoService;
 
 import java.util.HashMap;
@@ -23,29 +23,20 @@ public class MedicamentoController {
     private IMedicamentoService medicamentoService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Medicamento>> getAll()
-    {
-        List<Medicamento> lista = medicamentoService.getAll();
-        if (lista.isEmpty())
-        {
-            return ResponseEntity.badRequest().body(lista);
-
-        }
-        return ResponseEntity.ok(lista);
+    public ResponseEntity<List<MedicamentoDTO>> getAll() {
+        List<MedicamentoDTO> lista = medicamentoService.getAll();
+        return lista.isEmpty() ? ResponseEntity.badRequest().body(lista) : ResponseEntity.ok(lista);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid Medicamento medicamento) // Crea un servicio que inserta usuarios
-    {
-
-        medicamentoService.create(medicamento);
+    public ResponseEntity<String> create(@RequestBody @Valid MedicamentoDTO medicamentoDTO) {
+        medicamentoService.create(medicamentoDTO);
         return ResponseEntity.ok("Medicamento creado");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody @Valid Medicamento medicamento)
-    {
-        medicamentoService.create(medicamento);
+    public ResponseEntity<String> update(@RequestBody @Valid MedicamentoDTO medicamentoDTO) {
+        medicamentoService.create(medicamentoDTO);
         return ResponseEntity.ok("Medicamento actualizado");
     }
 

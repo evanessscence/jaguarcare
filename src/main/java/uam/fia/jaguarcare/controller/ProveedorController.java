@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import uam.fia.jaguarcare.dto.ProveedorDTO;
 import uam.fia.jaguarcare.model.Proveedor;
 import uam.fia.jaguarcare.service.IProveedorService;
 import uam.fia.jaguarcare.service.IVisitaService;
@@ -23,9 +24,9 @@ public class ProveedorController {
     private IProveedorService proveedorService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Proveedor>> getAll()
+    public ResponseEntity<List<ProveedorDTO>> getAll()
     {
-        List<Proveedor> lista = proveedorService.getAll();
+        List<ProveedorDTO> lista = proveedorService.getAll();
         if (lista.isEmpty())
         {
             return ResponseEntity.badRequest().body(lista);
@@ -35,24 +36,20 @@ public class ProveedorController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid Proveedor modelo) // Crea un servicio que inserta usuarios
-    {
-
-        proveedorService.create(modelo);
+    public ResponseEntity<String> create(@RequestBody @Valid ProveedorDTO proveedorDTO) {
+        proveedorService.create(proveedorDTO);
         return ResponseEntity.ok("Proveedor creado");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody @Valid Proveedor modelo)
-    {
-        proveedorService.create(modelo);
+    public ResponseEntity<String> update(@RequestBody @Valid ProveedorDTO proveedorDTO) {
+        proveedorService.create(proveedorDTO);
         return ResponseEntity.ok("Datos de proveedor actualizados");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id)
-    {
-       proveedorService.delete(id);
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        proveedorService.delete(id);
         return ResponseEntity.ok("Proveedor eliminado");
     }
 

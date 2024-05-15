@@ -1,6 +1,7 @@
 package uam.fia.jaguarcare.service;
 
 import org.springframework.stereotype.Service;
+import uam.fia.jaguarcare.dto.CompraDTO;
 import uam.fia.jaguarcare.model.Compra;
 import uam.fia.jaguarcare.model.Usuario;
 
@@ -10,11 +11,11 @@ import java.util.Optional;
 @Service
 public interface ICompraService {
 
-    public List<Compra> getAll();
+    public List<CompraDTO> getAll();
 
-    public void create(Compra compra);
+    public void create(CompraDTO compraDTO);
 
     public void delete(Integer id);
 
-    public Optional<Compra> find(Integer id);
+    public Optional<CompraDTO> find(Integer id);
 }
