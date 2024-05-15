@@ -22,7 +22,7 @@ public class Compra{
 	@JoinTable(name = "compra_medicamento", joinColumns = @JoinColumn(name = "compra_id"),
 			inverseJoinColumns = @JoinColumn(name = "medicamento_id"))
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Medicamento> medicamento;
+	private List<Medicamento> medicamentos;
 
 	@Min(value = 1, message = "La cantidad debe ser al menos 1")
 	private int cantidadComprada;
