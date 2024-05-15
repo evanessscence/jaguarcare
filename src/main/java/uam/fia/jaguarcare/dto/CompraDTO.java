@@ -8,6 +8,7 @@ import java.util.List;
 public class CompraDTO {
     private Integer NumeroDeFactura;
     private LocalDate fecha;
+    private Integer cantidadComprada;
     private List<MedicamentoDTO> medicamentos;
     private ProveedorDTO proveedor;
 

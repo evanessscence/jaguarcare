@@ -13,7 +13,7 @@ import lombok.*;
 @Data
 public class Compra{
 	@Id
-	private Integer id;
+	private Integer NumeroDeFactura;
 
 	@NotNull(message = "La fecha no puede estar vacia")
 	private LocalDate fecha;
@@ -24,21 +24,8 @@ public class Compra{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Medicamento> medicamento;
 
-	@NotNull(message = "La fecha de lote no puede estar vacia")
-	@PastOrPresent(message = "La fecha de lote debe ser en el pasado o presente")
-	private Date lote;
-
-	@NotNull(message = "La fecha de vencimiento no puede estar vacia")
-	@Future(message = "La fecha de vencimiento debe ser en el futuro")
-    private Date vencimiento;
-
-	@NotBlank(message = "La presentación no puede estar en blanco")
-    private String presentacion;
-
-    private String indicaciones;
-
 	@Min(value = 1, message = "La cantidad debe ser al menos 1")
-	private int cantidad;
+	private int cantidadComprada;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "proveedor_id")
