@@ -23,6 +23,7 @@ public class Visitante {
     private String primerApellido;
 
     @NotNull(message = "La carrera no puede estar vacia")
+    @Enumerated(EnumType.STRING)
     private Carrera carrera;
 
     @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "El número de teléfono no debe empezar en 0")
