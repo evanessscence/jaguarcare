@@ -10,11 +10,11 @@ import java.util.Optional;
 @Service
 public interface IVisitanteService {
 
-    public List<Visitante> getAll();
+    public List<VisitanteDTO> getAll();
 
-    public void create(Visitante visita);
+    public void create(VisitanteDTO visitanteDTO);
 
     public void delete(String id);
 
-    public Optional<Visitante> find(String id);
+    public Optional<VisitanteDTO> find(String id);
 }

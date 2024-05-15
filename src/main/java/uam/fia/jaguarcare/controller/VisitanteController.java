@@ -24,54 +24,44 @@ public class VisitanteController {
     private IVisitanteService visitanteService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Visitante>> getAll()
-    {
-        List<Visitante> lista = visitanteService.getAll();
-        if (lista.isEmpty())
-        {
-            return ResponseEntity.badRequest().body(lista);
-
-        }
-        return ResponseEntity.ok(lista);
+    public ResponseEntity<List<VisitanteDTO>> getAll() {
+        List<VisitanteDTO> lista = visitanteService.getAll();
+        return lista.isEmpty() ? ResponseEntity.badRequest().body(lista) : ResponseEntity.ok(lista);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid Visitante modelo) // Crea un servicio que inserta usuarios
-    {
+    public ResponseEntity<String> create(@RequestBody @Valid VisitanteDTO modelo) {
         visitanteService.create(modelo);
         return ResponseEntity.ok("Visitante creado");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody @Valid Visitante modelo)
-    {
+    public ResponseEntity<String> update(@RequestBody @Valid VisitanteDTO modelo) {
         visitanteService.create(modelo);
         return ResponseEntity.ok("Visitante actualizado");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") String id)
-    {
-       visitanteService.delete(id);
+    public ResponseEntity<String> delete(@PathVariable("id") String id) {
+        visitanteService.delete(id);
         return ResponseEntity.ok("Visitante eliminado");
     }
 
     @GetMapping("search/{id}")
-    public ResponseEntity<Optional<Visitante>> find(@PathVariable("id") String id)
-    {
-        Optional<Visitante> lista = visitanteService.find(id);
+    public ResponseEntity<Optional<VisitanteDTO>> find(@PathVariable("id") String id) {
+        Optional<VisitanteDTO> lista = visitanteService.find(id);
         return ResponseEntity.ok(lista);
     }
 
     //Bean Validation
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String,String> handleValidationException(MethodArgumentNotValidException exception){
-        Map<String,String> errors = new HashMap<>();
-        exception.getBindingResult().getAllErrors().forEach((error) ->{
+    public Map<String, String> handleValidationException(MethodArgumentNotValidException exception) {
+        Map<String, String> errors = new HashMap<>();
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError)error).getField();
             String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName,errorMessage);
+            errors.put(fieldName, errorMessage);
         });
         return errors;
     }

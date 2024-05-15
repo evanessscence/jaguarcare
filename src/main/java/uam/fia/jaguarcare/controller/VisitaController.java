@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import uam.fia.jaguarcare.dto.VisitaDTO;
 import uam.fia.jaguarcare.model.Visita;
 import uam.fia.jaguarcare.model.Visitante;
 import uam.fia.jaguarcare.repository.IVisitanteRepository;
@@ -26,36 +27,26 @@ public class VisitaController {
     private IVisitaService visitaService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Visita>> getAll()
-    {
-        List<Visita> lista = visitaService.getAll();
-        if (lista.isEmpty())
-        {
-            return ResponseEntity.badRequest().body(lista);
-
-        }
-        return ResponseEntity.ok(lista);
+    public ResponseEntity<List<VisitaDTO>> getAll() {
+        List<VisitaDTO> lista = visitaService.getAll();
+        return lista.isEmpty() ? ResponseEntity.badRequest().body(lista) : ResponseEntity.ok(lista);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid Visita modelo) // Crea un servicio que inserta usuarios
-    {
-
-        visitaService.create(modelo);
+    public ResponseEntity<String> create(@RequestBody @Valid VisitaDTO visitaDTO) {
+        visitaService.create(visitaDTO);
         return ResponseEntity.ok("Visita creada");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody @Valid Visita modelo)
-    {
-        visitaService.create(modelo);
+    public ResponseEntity<String> update(@RequestBody @Valid VisitaDTO visitaDTO) {
+        visitaService.create(visitaDTO);
         return ResponseEntity.ok("Visita actualizada");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id)
-    {
-       visitaService.delete(id);
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+        visitaService.delete(id);
         return ResponseEntity.ok("Visita eliminada");
     }
     //Bean Validation

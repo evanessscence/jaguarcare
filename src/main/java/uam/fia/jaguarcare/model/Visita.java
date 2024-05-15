@@ -29,18 +29,17 @@ public class Visita {
 
     private LocalDate fecha;
 
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
     private LocalTime horadeEntrada;
 
     @PrePersist
     public void createdAt()
     {
         this.fecha = LocalDate.now();
-        this.horadeEntrada = LocalTime.now();
         this.horadeSalida = LocalTime.now();
     }
 
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
     private LocalTime horadeSalida;
 
     @ManyToOne(fetch = FetchType.LAZY)

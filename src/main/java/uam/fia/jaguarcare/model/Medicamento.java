@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,13 +34,27 @@ public class Medicamento {
     private String dosis;
 
     @NotNull(message = "La presentación del medicamento debe ser ingresada")
-    private PresentacionMedicamento presentacionMedicamento;
+    @Enumerated(EnumType.STRING)
+    private PresentacionMedicamento presentacion;
+
+    @NotBlank(message = "El lote no puede estar en blanco")
+    private String lote;
+
+    @NotNull(message = "La fecha de vencimiento no puede estar vacia")
+    @Future(message = "La fecha de vencimiento debe ser en el futuro")
+    private Date vencimiento;
+
+    private String indicaciones;
+
+    @NotNull(message = "La cantidad no puede estar vacia")
+    @Min(value = 1, message = "La cantidad debe ser al menos 1")
+    private Integer cantidad;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "visita_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Visita visita;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "medicamento")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "medicamentos")
     private List<Compra> compra;
 }

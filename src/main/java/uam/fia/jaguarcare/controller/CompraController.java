@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import uam.fia.jaguarcare.dto.CompraDTO;
 import uam.fia.jaguarcare.model.Compra;
 import uam.fia.jaguarcare.service.ICompraService;
 import uam.fia.jaguarcare.service.IUsuarioService;
@@ -24,28 +25,25 @@ public class CompraController {
     private ICompraService compraService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<Compra>> getAll()
-    {
-        List<Compra> lista = compraService.getAll();
-        if (lista.isEmpty())
-        {
-            return ResponseEntity.badRequest().body(lista);
-
+    public ResponseEntity<List<CompraDTO>> getAll() {
+        List<CompraDTO> list = compraService.getAll();
+        if (list.isEmpty()) {
+            return ResponseEntity.badRequest().body(list);
         }
-        return ResponseEntity.ok(lista);
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid Compra modelo) // Crea un servicio que inserta usuarios
+    public ResponseEntity<String> create(@RequestBody @Valid CompraDTO compraDTO) // Crea un servicio que inserta usuarios
     {
-        compraService.create(modelo);
+        compraService.create(compraDTO);
         return ResponseEntity.ok("Compra creado");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody @Valid Compra modelo)
+    public ResponseEntity<String> update(@RequestBody @Valid CompraDTO compraDTO)
     {
-        compraService.create(modelo);
+        compraService.create(compraDTO);
         return ResponseEntity.ok("Compra actualizado");
     }
 
@@ -57,9 +55,9 @@ public class CompraController {
     }
 
     @GetMapping("search/{id}")
-    public ResponseEntity<Optional<Compra>> find(@PathVariable("id") Integer id)
+    public ResponseEntity<Optional<CompraDTO>> find(@PathVariable("id") Integer id)
     {
-        Optional<Compra> lista = compraService.find(id);
+        Optional<CompraDTO> lista = compraService.find(id);
         return ResponseEntity.ok(lista);
     }
 
