@@ -1,7 +1,6 @@
 package uam.fia.jaguarcare.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -13,19 +12,14 @@ import java.util.List;
 public class Usuario {
     @Id
     @NotBlank(message = "El CIF no puede estar vacío")
-    private String CIF;
+    private String idRecepcionista;
 
-    @NotBlank(message = "El nombre no puede estar vacío")
-    private String nombre;
+    @Column(length = 50)
+    String Cedula;
 
-    @NotBlank(message = "La contraseña no puede estar vacía")
-    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
-    private String contraseña;
+    @Column(length=50)
+    String name;
 
-    @NotNull(message = "El rol no puede estar vacío")
-    @Enumerated(EnumType.STRING)
-    private Rol rol;
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "usuario")
-    List<Visita> visitas;
+    @Hidden
+    String password;
 }

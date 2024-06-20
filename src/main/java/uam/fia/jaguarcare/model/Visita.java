@@ -1,65 +1,75 @@
 package uam.fia.jaguarcare.model;
+import java.time.*;
+import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import uam.fia.jaguarcare.model.enums.Destino;
 
 @Entity
-@Data
-public class Visita {
-    @Id
-    @SequenceGenerator(
-            name = "visita_sequence",
-            sequenceName = "visita_sequence",
-            allocationSize = 1,
-            initialValue = 1000
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "visita_sequence"
-    )
-    private Integer id;
+@Getter @Setter
 
-    private LocalDate fecha;
+public class Visita extends Identificable {
 
-    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
-    private LocalTime horadeEntrada;
 
-    @PrePersist
-    public void createdAt()
-    {
-        this.fecha = LocalDate.now();
-        this.horadeSalida = LocalTime.now();
-    }
+	@Column(length=6)
+	int anyo;
+		
+	@Column(length=6)
+	int numero;
+	
+	@ManyToOne(fetch = FetchType.LAZY,
+			optional = false)
+    private Recepcionista recepcionista;
+	
+	@Column(length=10)
+	private LocalDate date; 
+	
+	@Column(length=10)
+	private String horaEntrada;
 
-    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
-    private LocalTime horadeSalida;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "visitante_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@Column(length=10)
+	@NotNull
+	private String horaSalida;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
     private Visitante visitante;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Usuario usuario;
+	@ManyToOne(fetch=FetchType.LAZY, optional = true)
+	private Sintomatologia sintomatologia; 
+	     
+	@Enumerated(EnumType.STRING)
+	private Destino destino;
+	    
+	private String diagnostico;
+	    
+	@ManyToMany(fetch=FetchType.LAZY)
+	private List<Medicamento> medicamentos;
+	    
+	private Integer cantidadDispensada;
+	
+    @PrePersist
+    @PreUpdate
+    private void checkMedicamentoDisponible() {
+    	Medicamento medicine = new Medicamento();
+        medicine.verificarCantidadMinima();
+    }
+	   
+/*	@PrePersist
+	@PreUpdate
+	private void validarHoras() throws Exception {
+	    if (horaEntrada != null && horaSalida != null) {
+	        LocalTime horaEntradaParsed = LocalTime.parse(this.horaEntrada);
+	        LocalTime horaSalidaParsed = LocalTime.parse(this.horaSalida);
 
-    private String diagnostico;
-    private Integer cantDispensada;
+	        if (horaSalidaParsed.isBefore(horaEntradaParsed)) {
+	            throw new javax.validation.ValidationException(
+	                    "La hora de salida debe ser mayor que la hora de entrada."
+	            );
+	        }
+	    }
+	} */
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "visita")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private List<Medicamento> medicamentos;
-
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "sintomatologia_id")
-    private Sintomatologia sintomatologia;
 }

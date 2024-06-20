@@ -1,8 +1,7 @@
 package uam.fia.jaguarcare.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
-import uam.fia.jaguarcare.model.Carrera;
+import uam.fia.jaguarcare.model.enums.Carrera;
 @Data
 public class VisitanteDTO {
     private String cifID;

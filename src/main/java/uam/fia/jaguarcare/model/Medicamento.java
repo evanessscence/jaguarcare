@@ -1,60 +1,50 @@
 package uam.fia.jaguarcare.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.*;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.Data;
-import java.util.Date;
-import java.util.List;
+import lombok.*;
+import uam.fia.jaguarcare.exceptions.RefillException;
+import uam.fia.jaguarcare.model.enums.PresentacionMedicamento;
 
 @Entity
-@Data
-public class Medicamento {
+@Getter @Setter
+/*@NamedQueries({
+	@NamedQuery(name="Medicamento.findByNombre",query="select e from Medicamento e where e.nombre like ?1")
+})*/
 
-    @Id
-    @SequenceGenerator(
-            name = "med_sequence",
-            sequenceName = "med_sequence",
-            allocationSize = 1,
-            initialValue = 1000
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "med_sequence"
-    )
-    private Integer id;
-
-    @NotBlank(message = "El nombre comercial no puede estar en blanco")
-    private String nombreComercial;
-
-    @NotBlank(message = "El nombre genérico no puede estar en blanco")
+public class Medicamento extends Identificable{
+	
+	private String nombreComercial;
+	@Column
     private String nombreGenerico;
-
-    @NotBlank(message = "La dosis no puede estar en blanco")
+    @Column
     private String dosis;
-
-    @NotNull(message = "La presentación del medicamento debe ser ingresada")
+    
     @Enumerated(EnumType.STRING)
     private PresentacionMedicamento presentacion;
-
-    @NotBlank(message = "El lote no puede estar en blanco")
-    private String lote;
-
-    @NotNull(message = "La fecha de vencimiento no puede estar vacia")
-    @Future(message = "La fecha de vencimiento debe ser en el futuro")
+    @Column
+	private String lote;
+    @Column
     private Date vencimiento;
-
+    @Column
     private String indicaciones;
+    @Column
+    private Integer cantidadDisponible;
 
-    @NotNull(message = "La cantidad no puede estar vacia")
-    @Min(value = 1, message = "La cantidad debe ser al menos 1")
-    private Integer cantidad;
+	@Column
+	private Integer cantidadMinima;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "visita_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Visita visita;
+	@PrePersist
+    @PreUpdate
+    public void verificarCantidadMinima() {
+        if (cantidadDisponible != null && cantidadMinima != null) {
+            if (cantidadDisponible <= cantidadMinima) {
+                throw new RefillException(
+                        "La cantidad disponible de '" + nombreComercial + "' está cerca o por debajo de la cantidad mínima. Rellene."
+                );
+            }
+        }
+    }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "medicamentos")
-    private List<Compra> compra;
+
 }

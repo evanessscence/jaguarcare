@@ -1,7 +1,7 @@
 package uam.fia.jaguarcare.dto;
 
 import lombok.Data;
-import uam.fia.jaguarcare.model.PresentacionMedicamento;
+import uam.fia.jaguarcare.model.enums.PresentacionMedicamento;
 import java.util.Date;
 
 @Data

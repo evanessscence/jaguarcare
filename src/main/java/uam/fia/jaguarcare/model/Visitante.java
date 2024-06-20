@@ -1,35 +1,35 @@
 package uam.fia.jaguarcare.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
-import java.util.List;
+import lombok.*;
+import jakarta.persistence.*;
+import uam.fia.jaguarcare.model.enums.Carrera;
+import uam.fia.jaguarcare.model.enums.TipoVisitante;
 
 @Entity
-@Data
+@Getter @Setter
+
 public class Visitante {
 
-    @Id
-    @NotBlank(message = "El CIF no puede estar vacío")
-    private String cifID;
+	@Id
+	private String cifID;
 
-    @Column(length=25)
-    @NotBlank(message = "El primer nombre no puede estar en blanco")
-    private String primerNombre;
+	private String primerNombre;
 
-    @Column(length=25)
-    @NotBlank(message = "El primer apellido no puede estar en blanco")
-    private String primerApellido;
-
-    @NotNull(message = "La carrera no puede estar vacia")
-    @Enumerated(EnumType.STRING)
+	private String primerApellido;
+	
+	@Enumerated(EnumType.STRING)
     private Carrera carrera;
+    
+    @Enumerated(EnumType.STRING)
+    private TipoVisitante tipo;
 
-    @Pattern(regexp = "^\\+?[1-9]\\d{1,14}$", message = "El número de teléfono no debe empezar en 0")
     private String telefono;
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "visitante",cascade = CascadeType.ALL)
-    List<Visita> visitas;
-
+	
+	/*@OneToMany(mappedBy="visitante")
+	@ListProperties("numero,date,receta.diagnostico,receta.sintomatologia.nombre,receta.medicamento.nombre,receta.cantidad")
+	Collection<Visita> visitas;*/
+	
 }

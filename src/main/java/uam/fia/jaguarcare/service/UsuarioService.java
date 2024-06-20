@@ -40,19 +40,19 @@ public class UsuarioService implements IUsuarioService {
 
     private UsuarioDTO convertToDTO(Usuario usuario) {
         UsuarioDTO dto = new UsuarioDTO();
-        dto.setCif(usuario.getCIF());
-        dto.setNombre(usuario.getNombre());
-        dto.setContraseña(usuario.getContraseña());
-        dto.setRol(usuario.getRol());
+        dto.setIdRecepcionista(usuario.getIdRecepcionista());
+        dto.setCedula(usuario.getCedula());
+        dto.setCedula(usuario.getName());
+        dto.setPassword(usuario.getPassword());
         return dto;
     }
 
     private Usuario convertToEntity(UsuarioDTO dto) {
         Usuario usuario = new Usuario();
-        usuario.setCIF(dto.getCif());
-        usuario.setNombre(dto.getNombre());
-        usuario.setContraseña(dto.getContraseña());
-        usuario.setRol(dto.getRol());
+        usuario.setIdRecepcionista(dto.getIdRecepcionista());
+        usuario.setName(dto.getName());
+        usuario.setCedula(dto.getCedula());
+        usuario.setPassword(dto.getPassword());
         return usuario;
     }
 }
