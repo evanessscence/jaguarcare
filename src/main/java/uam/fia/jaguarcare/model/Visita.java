@@ -22,7 +22,7 @@ public class Visita extends Identificable {
 	
 	@ManyToOne(fetch = FetchType.LAZY,
 			optional = false)
-    private Recepcionista recepcionista;
+    private Usuario recepcionista;
 	
 	@Column(length=10)
 	private LocalDate date; 
