@@ -14,7 +14,7 @@ import uam.fia.jaguarcare.service.ISintomaService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/sintoma")

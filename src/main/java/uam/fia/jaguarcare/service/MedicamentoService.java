@@ -39,7 +39,8 @@ public class MedicamentoService implements IMedicamentoService {
         dto.setLote(medicamento.getLote());
         dto.setVencimiento(medicamento.getVencimiento());
         dto.setIndicaciones(medicamento.getIndicaciones());
-        dto.setCantidad(medicamento.getCantidad());
+        dto.setCantidadDisponible(medicamento.getCantidadDisponible());
+        dto.setCantidadMinima(medicamento.getCantidadMinima());
         return dto;
     }
 
@@ -53,7 +54,8 @@ public class MedicamentoService implements IMedicamentoService {
         medicamento.setLote(dto.getLote());
         medicamento.setVencimiento(dto.getVencimiento());
         medicamento.setIndicaciones(dto.getIndicaciones());
-        medicamento.setCantidad(dto.getCantidad());
+        medicamento.setCantidadDisponible(dto.getCantidadDisponible());
+        medicamento.setCantidadMinima(dto.getCantidadMinima());
         return medicamento;
     }
 }

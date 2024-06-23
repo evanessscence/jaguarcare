@@ -19,5 +19,6 @@ public class Inventario extends Identificable{
     
 	private Integer cantidadComprada; 
 
+
 }
 

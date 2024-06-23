@@ -6,6 +6,7 @@ import uam.fia.jaguarcare.dto.VisitaDTO;
 import uam.fia.jaguarcare.model.Visita;
 import uam.fia.jaguarcare.repository.IVisitaRepository;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,24 +37,23 @@ public class VisitaService implements IVisitaService {
     private VisitaDTO convertToDTO(Visita visita) {
         VisitaDTO dto = new VisitaDTO();
         dto.setId(visita.getId());
-        dto.setFecha(visita.getFecha());
-        dto.setHoradeEntrada(visita.getHoradeEntrada());
-        dto.setHoradeSalida(visita.getHoradeSalida());
+        dto.setFecha(visita.getDate());
+        dto.setHoradeEntrada(LocalTime.parse(visita.getHoraEntrada()));
+        dto.setHoradeSalida(LocalTime.parse(visita.getHoraSalida()));
         dto.setVisitanteId(visita.getVisitante().getCifID());
-        dto.setUsuarioId(visita.getUsuario().getCIF());
+        dto.setUsuarioId(visita.getRecepcionista().getIdRecepcionista());
         dto.setDiagnostico(visita.getDiagnostico());
-        dto.setCantDispensada(visita.getCantDispensada());
-        dto.setSintomatologiaId(Optional.ofNullable(visita.getSintomatologia()).map(s -> s.getId()).orElse(null));
+        dto.setCantDispensada(visita.getCantidadDispensada());
+        dto.setSintomatologiaId(Integer.valueOf(Optional.ofNullable(visita.getSintomatologia()).map(s -> s.getId()).orElse(null)));
         return dto;
     }
 
     private Visita convertToEntity(VisitaDTO dto) {
         Visita visita = new Visita();
         visita.setId(dto.getId());
-        visita.setFecha(dto.getFecha());
-        visita.setHoradeEntrada(dto.getHoradeEntrada());
-        visita.setHoradeSalida(dto.getHoradeSalida());
-
+        visita.setDate(dto.getFecha());
+        visita.setHoraEntrada(String.valueOf(dto.getHoradeEntrada()));
+        visita.setHoraSalida(String.valueOf(dto.getHoradeSalida()));
         return visita;
     }
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Data
 public class MedicamentoDTO {
-    private Integer id;
+    private String id;
     private String nombreComercial;
     private String nombreGenerico;
     private String dosis;
@@ -14,6 +14,7 @@ public class MedicamentoDTO {
     private String lote;
     private Date vencimiento;
     private String indicaciones;
-    private int cantidad;
+    private Integer cantidadDisponible;
+    private Integer cantidadMinima;
 
 }

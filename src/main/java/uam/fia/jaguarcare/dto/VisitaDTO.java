@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 @Data
 public class VisitaDTO {
-    private Integer id;
+    private String id;
     private LocalDate fecha;
 
     @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")

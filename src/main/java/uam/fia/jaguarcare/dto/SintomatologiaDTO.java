@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SintomatologiaDTO {
-    private Integer Id;
+    private String Id;
     private String nombre;
 }
