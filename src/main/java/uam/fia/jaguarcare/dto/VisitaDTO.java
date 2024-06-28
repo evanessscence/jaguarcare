@@ -1,25 +1,27 @@
 package uam.fia.jaguarcare.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import uam.fia.jaguarcare.model.Medicamento;
+import uam.fia.jaguarcare.model.Sintomatologia;
+import uam.fia.jaguarcare.model.Usuario;
+import uam.fia.jaguarcare.model.Visitante;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.List;
 
 @Data
 public class VisitaDTO {
     private String id;
     private LocalDate fecha;
 
-    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
-    private LocalTime horadeEntrada;
+    private String horadeEntrada;
 
-    @JsonFormat(pattern = "HH:mm:ss", timezone = "UTC")
-    private LocalTime horadeSalida;
+    private String horadeSalida;
 
-    private String visitanteId;
-    private String usuarioId;
+    private Visitante visitanteId;
+    private Usuario recepcionista;
     private String diagnostico;
     private Integer cantDispensada;
-    private Integer sintomatologiaId;
+    private Sintomatologia sintomatologiaId;
+    private List<Medicamento> medicamento;
 }

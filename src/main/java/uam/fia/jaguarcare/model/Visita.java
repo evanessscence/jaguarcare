@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import uam.fia.jaguarcare.model.enums.Destino;
 
 @Entity
@@ -24,20 +25,20 @@ public class Visita extends Identificable {
 			optional = false)
     private Usuario recepcionista;
 	
-	@Column(length=10)
+	@Column(length=20)
 	private LocalDate date; 
 	
-	@Column(length=10)
+	@Column(length=20)
 	private String horaEntrada;
 
-	@Column(length=10)
+	@Column(length=20)
 	@NotNull
 	private String horaSalida;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     private Visitante visitante;
 
-	@ManyToOne(fetch=FetchType.LAZY, optional = true)
+	@ManyToOne(fetch=FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
 	private Sintomatologia sintomatologia; 
 	     
 	@Enumerated(EnumType.STRING)

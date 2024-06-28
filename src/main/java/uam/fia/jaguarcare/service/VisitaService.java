@@ -6,6 +6,7 @@ import uam.fia.jaguarcare.dto.VisitaDTO;
 import uam.fia.jaguarcare.model.Visita;
 import uam.fia.jaguarcare.repository.IVisitaRepository;
 
+import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
@@ -38,13 +39,14 @@ public class VisitaService implements IVisitaService {
         VisitaDTO dto = new VisitaDTO();
         dto.setId(visita.getId());
         dto.setFecha(visita.getDate());
-        dto.setHoradeEntrada(LocalTime.parse(visita.getHoraEntrada()));
-        dto.setHoradeSalida(LocalTime.parse(visita.getHoraSalida()));
-        dto.setVisitanteId(visita.getVisitante().getCifID());
-        dto.setUsuarioId(visita.getRecepcionista().getIdRecepcionista());
+        dto.setHoradeEntrada(visita.getHoraEntrada());
+        dto.setHoradeSalida(visita.getHoraSalida());
+        dto.setVisitanteId(visita.getVisitante());
+        dto.setRecepcionista(visita.getRecepcionista());
         dto.setDiagnostico(visita.getDiagnostico());
         dto.setCantDispensada(visita.getCantidadDispensada());
-        dto.setSintomatologiaId(Integer.valueOf(Optional.ofNullable(visita.getSintomatologia()).map(s -> s.getId()).orElse(null)));
+        dto.setSintomatologiaId(visita.getSintomatologia());
+        dto.setMedicamento(visita.getMedicamentos());
         return dto;
     }
 
@@ -52,8 +54,14 @@ public class VisitaService implements IVisitaService {
         Visita visita = new Visita();
         visita.setId(dto.getId());
         visita.setDate(dto.getFecha());
-        visita.setHoraEntrada(String.valueOf(dto.getHoradeEntrada()));
-        visita.setHoraSalida(String.valueOf(dto.getHoradeSalida()));
+        visita.setHoraEntrada(dto.getHoradeEntrada());
+        visita.setHoraSalida(dto.getHoradeSalida());
+        visita.setVisitante(dto.getVisitanteId());
+        visita.setRecepcionista(dto.getRecepcionista());
+        visita.setDiagnostico(dto.getDiagnostico());
+        visita.setCantidadDispensada(dto.getCantDispensada());
+        visita.setSintomatologia(dto.getSintomatologiaId());
+        visita.setMedicamentos(dto.getMedicamento());
         return visita;
     }
 }
