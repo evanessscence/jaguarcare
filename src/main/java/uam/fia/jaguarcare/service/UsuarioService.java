@@ -42,7 +42,7 @@ public class UsuarioService implements IUsuarioService {
         UsuarioDTO dto = new UsuarioDTO();
         dto.setIdRecepcionista(usuario.getIdRecepcionista());
         dto.setCedula(usuario.getCedula());
-        dto.setCedula(usuario.getName());
+        dto.setName(usuario.getName());
         dto.setPassword(usuario.getPassword());
         return dto;
     }
