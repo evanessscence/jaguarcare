@@ -12,7 +12,6 @@ import java.util.List;
 public class Usuario {
     @Id
     @NotBlank(message = "El CIF no puede estar vacío")
-    @Column(length = 10)
     private String idrecepcionista;
 
     @Column(length = 50)
