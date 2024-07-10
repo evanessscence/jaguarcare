@@ -18,4 +18,6 @@ public interface IUsuarioService {
     public void delete(String id);
 
     public Optional<UsuarioDTO> find(String id);
+
+    int getLogin(String cedula, String password);
 }

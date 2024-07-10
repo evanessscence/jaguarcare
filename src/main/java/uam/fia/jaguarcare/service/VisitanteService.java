@@ -42,7 +42,7 @@ public class VisitanteService implements IVisitanteService {
 
     private VisitanteDTO convertToDTO(Visitante visitante) {
         VisitanteDTO dto = new VisitanteDTO();
-        dto.setCifID(visitante.getCifID());
+        dto.setCifID(visitante.getID());
         dto.setPrimerNombre(visitante.getPrimerNombre());
         dto.setPrimerApellido(visitante.getPrimerApellido());
         dto.setCarrera(visitante.getCarrera());
@@ -52,7 +52,7 @@ public class VisitanteService implements IVisitanteService {
 
     private Visitante convertToEntity(VisitanteDTO dto) {
         Visitante visitante = new Visitante();
-        visitante.setCifID(dto.getCifID());
+        visitante.setID(dto.getCifID());
         visitante.setPrimerNombre(dto.getPrimerNombre());
         visitante.setPrimerApellido(dto.getPrimerApellido());
         visitante.setCarrera(dto.getCarrera());

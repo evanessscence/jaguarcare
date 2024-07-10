@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+
 public class UsuarioService implements IUsuarioService {
 
     @Autowired
@@ -38,9 +39,14 @@ public class UsuarioService implements IUsuarioService {
                 .map(this::convertToDTO);
     }
 
+    @Override
+    public int getLogin(String cedula, String password) {
+        return usuarioRepository.getLogin(cedula,password);
+    }
+
     private UsuarioDTO convertToDTO(Usuario usuario) {
         UsuarioDTO dto = new UsuarioDTO();
-        dto.setIdRecepcionista(usuario.getIdRecepcionista());
+        dto.setIdRecepcionista(usuario.getIdrecepcionista());
         dto.setCedula(usuario.getCedula());
         dto.setName(usuario.getName());
         dto.setPassword(usuario.getPassword());
@@ -49,7 +55,7 @@ public class UsuarioService implements IUsuarioService {
 
     private Usuario convertToEntity(UsuarioDTO dto) {
         Usuario usuario = new Usuario();
-        usuario.setIdRecepcionista(dto.getIdRecepcionista());
+        usuario.setIdrecepcionista(dto.getIdRecepcionista());
         usuario.setName(dto.getName());
         usuario.setCedula(dto.getCedula());
         usuario.setPassword(dto.getPassword());

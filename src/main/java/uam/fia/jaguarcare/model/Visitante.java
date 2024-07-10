@@ -14,7 +14,7 @@ import uam.fia.jaguarcare.model.enums.TipoVisitante;
 public class Visitante {
 
 	@Id
-	private String cifID;
+	private String ID;
 
 	private String primerNombre;
 

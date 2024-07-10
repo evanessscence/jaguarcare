@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import uam.fia.jaguarcare.dto.UsuarioDTO;
 import uam.fia.jaguarcare.model.Usuario;
+import uam.fia.jaguarcare.repository.IUsuarioRepository;
 import uam.fia.jaguarcare.service.IUsuarioService;
 import uam.fia.jaguarcare.service.IVisitanteService;
 
@@ -19,10 +20,19 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuario")
+@CrossOrigin("*")
 public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
+    @Autowired
+    private IUsuarioRepository repoUsuario;
+
+    @GetMapping("/login")
+    public Integer getLogin(@RequestParam("cedula") String cedula,
+                            @RequestParam("password") String password) {
+        return usuarioService.getLogin(cedula,password);
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<UsuarioDTO>> getAll() {

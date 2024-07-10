@@ -15,9 +15,9 @@ public class Inventario extends Identificable{
 	int anyo;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    private Medicamento medicamentoComprado; 
+    private Medicamento medicamentocomprado;
     
-	private Integer cantidadComprada; 
+	private Integer cantidadmedComprada;
 
 
 }

@@ -55,8 +55,8 @@ return ResponseEntity.ok("Inventario eliminada");
 private InventarioDTO convertToDTO(Inventario inventario) {
 InventarioDTO dto = new InventarioDTO();
 dto.setAnyo(inventario.getAnyo());
-dto.setMedicamentoComprado(inventario.getMedicamentoComprado());
-dto.setCantidadComprada(inventario.getCantidadComprada());
+dto.setMedicamentoComprado(inventario.getMedicamentocomprado());
+dto.setCantidadComprada(inventario.getCantidadmedComprada());
 return dto;
 }
 

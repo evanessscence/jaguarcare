@@ -41,16 +41,16 @@ public class InventarioService implements IInventarioService {
     private InventarioDTO convertToDTO(Inventario Inventario) {
         InventarioDTO dto = new InventarioDTO();
         dto.setAnyo(Inventario.getAnyo());
-        dto.setMedicamentoComprado(Inventario.getMedicamentoComprado());
-        dto.setCantidadComprada(Inventario.getCantidadComprada());
+        dto.setMedicamentoComprado(Inventario.getMedicamentocomprado());
+        dto.setCantidadComprada(Inventario.getCantidadmedComprada());
         return dto;
     }
 
     private Inventario convertToEntity(InventarioDTO dto) {
         Inventario Inventario = new Inventario();
         Inventario.setAnyo(dto.getAnyo());
-        Inventario.setMedicamentoComprado(dto.getMedicamentoComprado());
-        Inventario.setCantidadComprada(dto.getCantidadComprada());
+        Inventario.setMedicamentocomprado(dto.getMedicamentoComprado());
+        Inventario.setCantidadmedComprada(dto.getCantidadComprada());
         return Inventario;
     }
 }
