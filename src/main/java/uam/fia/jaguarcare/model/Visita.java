@@ -51,28 +51,7 @@ public class Visita extends Identificable {
 	    
 	private Integer cantidadDispensada;
 
-	private void checkMedicamentoDisponible() {
-		if (medicamentos != null) {
-			for (Medicamento medicine : medicamentos) {
-				medicine.verificarCantidadMinima();
-			}
-		}
-	}
 
-	   
-/*	@PrePersist
-	@PreUpdate
-	private void validarHoras() throws Exception {
-	    if (horaEntrada != null && horaSalida != null) {
-	        LocalTime horaEntradaParsed = LocalTime.parse(this.horaEntrada);
-	        LocalTime horaSalidaParsed = LocalTime.parse(this.horaSalida);
 
-	        if (horaSalidaParsed.isBefore(horaEntradaParsed)) {
-	            throw new javax.validation.ValidationException(
-	                    "La hora de salida debe ser mayor que la hora de entrada."
-	            );
-	        }
-	    }
-	} */
 
 }

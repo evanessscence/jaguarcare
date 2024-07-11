@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uam.fia.jaguarcare.dto.InventarioDTO;
 import uam.fia.jaguarcare.model.Inventario;
+import uam.fia.jaguarcare.model.Medicamento;
+import uam.fia.jaguarcare.model.Visita;
 import uam.fia.jaguarcare.repository.IInventarioRepository;
+import uam.fia.jaguarcare.repository.IMedicamentoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +17,9 @@ import java.util.stream.Collectors;
 public class InventarioService implements IInventarioService {
     @Autowired
     private IInventarioRepository InventarioRepository;
+
+    @Autowired
+    private IMedicamentoRepository medRepository;
     @Override
     public List<InventarioDTO> getAll() {
         return InventarioRepository.findAll().stream()
@@ -24,6 +30,7 @@ public class InventarioService implements IInventarioService {
     @Override
     public void create(InventarioDTO InventarioDTO) {
         Inventario Inventario= convertToEntity(InventarioDTO);
+        sumarMedicamentos(Inventario);
         InventarioRepository.save(Inventario);
     }
 
@@ -52,5 +59,14 @@ public class InventarioService implements IInventarioService {
         Inventario.setMedicamentocomprado(dto.getMedicamentoComprado());
         Inventario.setCantidadmedComprada(dto.getCantidadComprada());
         return Inventario;
+    }
+
+    private void sumarMedicamentos(Inventario inventario) {
+        if (inventario.getMedicamentocomprado() != null) {
+            Medicamento medicamento = inventario.getMedicamentocomprado();
+                Integer cantidadmedComprada = inventario.getCantidadmedComprada();
+                medicamento.setCantidadDisponible(medicamento.getCantidadDisponible() + cantidadmedComprada);
+                medRepository.save(medicamento); // Actualiza el medicamento en la BD
+        }
     }
 }

@@ -35,13 +35,11 @@ public class Medicamento extends Identificable{
 	private Integer cantidadMinima;
 
     public void verificarCantidadMinima() {
-        if (cantidadDisponible != null && cantidadMinima != null) {
             if (cantidadDisponible <= cantidadMinima) {
                 throw new RefillException(
                         "La cantidad disponible de '" + nombreComercial + "' está cerca o por debajo de la cantidad mínima. Rellene."
                 );
             }
-        }
     }
 
 

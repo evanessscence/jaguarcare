@@ -1,9 +1,12 @@
 package uam.fia.jaguarcare.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uam.fia.jaguarcare.dto.VisitaDTO;
+import uam.fia.jaguarcare.model.Medicamento;
 import uam.fia.jaguarcare.model.Visita;
+import uam.fia.jaguarcare.repository.IMedicamentoRepository;
 import uam.fia.jaguarcare.repository.IVisitaRepository;
 
 import java.sql.Time;
@@ -17,6 +20,8 @@ public class VisitaService implements IVisitaService {
 
     @Autowired
     private IVisitaRepository modeloRepositorio;
+    @Autowired
+    private IMedicamentoRepository medicamentoRepository;
 
     @Override
     public List<VisitaDTO> getAll() {
@@ -26,8 +31,10 @@ public class VisitaService implements IVisitaService {
     }
 
     @Override
+    @Transactional
     public void create(VisitaDTO visitaDTO) {
         Visita visita = convertToEntity(visitaDTO);
+        actualizarCantidadesDeMedicamentos(visita);
         modeloRepositorio.save(visita);
     }
 
@@ -65,5 +72,17 @@ public class VisitaService implements IVisitaService {
         visita.setMedicamentos(dto.getMedicamento());
         visita.setDestino(dto.getDestino());
         return visita;
+    }
+
+    private void actualizarCantidadesDeMedicamentos(Visita visita) {
+        if (visita.getMedicamentos() != null) {
+            for (Medicamento medicamento : visita.getMedicamentos()) {
+                Integer cantidadDispensada = visita.getCantidadDispensada();
+                    medicamento.setCantidadDisponible(medicamento.getCantidadDisponible() - cantidadDispensada);
+                    medicamento.verificarCantidadMinima();  // Verifica si es necesario un refill
+                    medicamentoRepository.save(medicamento); // Actualiza el medicamento en la BD
+
+            }
+        }
     }
 }
