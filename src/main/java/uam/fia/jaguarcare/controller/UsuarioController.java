@@ -33,7 +33,6 @@ public class UsuarioController {
                             @RequestParam("password") String password) {
         return usuarioService.getLogin(cedula,password);
     }
-
     @GetMapping("/all")
     public ResponseEntity<List<UsuarioDTO>> getAll() {
         List<UsuarioDTO> list = usuarioService.getAll();

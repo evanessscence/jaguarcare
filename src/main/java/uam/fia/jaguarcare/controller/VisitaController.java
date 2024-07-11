@@ -21,6 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/visita")
+@CrossOrigin("*")
 public class VisitaController {
 
     @Autowired

@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/visitante")
+@CrossOrigin("*")
 public class VisitanteController {
 
     @Autowired
