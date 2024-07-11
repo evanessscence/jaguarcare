@@ -46,17 +46,19 @@ public class Visita extends Identificable {
 	    
 	private String diagnostico;
 	    
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Medicamento> medicamentos;
 	    
 	private Integer cantidadDispensada;
-	
-    @PrePersist
-    @PreUpdate
-    private void checkMedicamentoDisponible() {
-    	Medicamento medicine = new Medicamento();
-        medicine.verificarCantidadMinima();
-    }
+
+	private void checkMedicamentoDisponible() {
+		if (medicamentos != null) {
+			for (Medicamento medicine : medicamentos) {
+				medicine.verificarCantidadMinima();
+			}
+		}
+	}
+
 	   
 /*	@PrePersist
 	@PreUpdate

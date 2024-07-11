@@ -46,7 +46,7 @@ public class VisitaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id) {
+    public ResponseEntity<String> delete(@PathVariable("id") String id) {
         visitaService.delete(id);
         return ResponseEntity.ok("Visita eliminada");
     }

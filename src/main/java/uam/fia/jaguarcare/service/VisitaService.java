@@ -32,7 +32,7 @@ public class VisitaService implements IVisitaService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         modeloRepositorio.deleteById(id);
     }
     private VisitaDTO convertToDTO(Visita visita) {
@@ -47,6 +47,7 @@ public class VisitaService implements IVisitaService {
         dto.setCantDispensada(visita.getCantidadDispensada());
         dto.setSintomatologiaId(visita.getSintomatologia());
         dto.setMedicamento(visita.getMedicamentos());
+        dto.setDestino(visita.getDestino());
         return dto;
     }
 
@@ -62,6 +63,7 @@ public class VisitaService implements IVisitaService {
         visita.setCantidadDispensada(dto.getCantDispensada());
         visita.setSintomatologia(dto.getSintomatologiaId());
         visita.setMedicamentos(dto.getMedicamento());
+        visita.setDestino(dto.getDestino());
         return visita;
     }
 }

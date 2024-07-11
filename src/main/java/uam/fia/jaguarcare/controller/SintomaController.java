@@ -49,7 +49,7 @@ public class SintomaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id)
+    public ResponseEntity<String> delete(@PathVariable("id") String id)
     {
        sintomaService.delete(id);
         return ResponseEntity.ok("Sintomatologia eliminada");

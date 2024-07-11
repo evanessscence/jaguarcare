@@ -41,7 +41,7 @@ public class MedicamentoController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id)
+    public ResponseEntity<String> delete(@PathVariable("id") String id)
     {
        medicamentoService.delete(id);
         return ResponseEntity.ok("Medicamento eliminado");

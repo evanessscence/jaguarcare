@@ -28,7 +28,7 @@ public class SintomaService implements ISintomaService {
         iSintomaRepository.save(sintomatologia);
     }
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
     iSintomaRepository.deleteById(id);
     }
 

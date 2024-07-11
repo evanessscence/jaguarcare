@@ -5,7 +5,7 @@ import uam.fia.jaguarcare.model.Medicamento;
 import uam.fia.jaguarcare.model.Visita;
 
 
-public interface IMedicamentoRepository extends JpaRepository<Medicamento, Integer> {
+public interface IMedicamentoRepository extends JpaRepository<Medicamento, String> {
 
 
 }

@@ -25,7 +25,7 @@ public class MedicamentoService implements IMedicamentoService {
         Medicamento medicamento = convertToEntity(medicamentoDTO);
         medicamentoRepository.save(medicamento);
     }
-    public void delete(Integer id) {
+    public void delete(String id) {
         medicamentoRepository.deleteById(id);
     }
 

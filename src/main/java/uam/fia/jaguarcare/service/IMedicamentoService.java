@@ -14,6 +14,6 @@ public interface IMedicamentoService {
 
     public void create(MedicamentoDTO medicamentoDTO);
 
-    public void delete(Integer id);
+    public void delete(String id);
 
 }

@@ -13,6 +13,6 @@ public interface IVisitaService {
 
     public void create(VisitaDTO visitaDTO);
 
-    public void delete(Integer id);
+    public void delete(String id);
 
 }

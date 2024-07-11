@@ -34,8 +34,6 @@ public class Medicamento extends Identificable{
 	@Column
 	private Integer cantidadMinima;
 
-	@PrePersist
-    @PreUpdate
     public void verificarCantidadMinima() {
         if (cantidadDisponible != null && cantidadMinima != null) {
             if (cantidadDisponible <= cantidadMinima) {

@@ -13,6 +13,6 @@ public interface ISintomaService {
 
     public void create(SintomatologiaDTO sintomatologiaDTO);
 
-    public void delete(Integer id);
+    public void delete(String id);
 
 }

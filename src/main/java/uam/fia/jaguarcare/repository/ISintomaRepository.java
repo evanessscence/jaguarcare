@@ -5,6 +5,6 @@ import uam.fia.jaguarcare.model.Sintomatologia;
 import uam.fia.jaguarcare.model.Visitante;
 
 
-public interface ISintomaRepository extends JpaRepository<Sintomatologia, Integer> {
+public interface ISintomaRepository extends JpaRepository<Sintomatologia, String> {
 
 }
