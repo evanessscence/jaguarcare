@@ -9,10 +9,7 @@ import uam.fia.jaguarcare.model.Visita;
 import uam.fia.jaguarcare.repository.IMedicamentoRepository;
 import uam.fia.jaguarcare.repository.IVisitaRepository;
 
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,7 +45,7 @@ public class VisitaService implements IVisitaService {
         dto.setFecha(visita.getDate());
         dto.setHoradeEntrada(visita.getHoraEntrada());
         dto.setHoradeSalida(visita.getHoraSalida());
-        dto.setVisitanteId(visita.getVisitante());
+        dto.setVisitante(visita.getVisitante());
         dto.setRecepcionista(visita.getRecepcionista());
         dto.setDiagnostico(visita.getDiagnostico());
         dto.setCantDispensada(visita.getCantidadDispensada());
@@ -64,7 +61,7 @@ public class VisitaService implements IVisitaService {
         visita.setDate(dto.getFecha());
         visita.setHoraEntrada(dto.getHoradeEntrada());
         visita.setHoraSalida(dto.getHoradeSalida());
-        visita.setVisitante(dto.getVisitanteId());
+        visita.setVisitante(dto.getVisitante());
         visita.setRecepcionista(dto.getRecepcionista());
         visita.setDiagnostico(dto.getDiagnostico());
         visita.setCantidadDispensada(dto.getCantDispensada());
