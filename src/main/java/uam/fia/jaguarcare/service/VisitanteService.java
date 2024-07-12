@@ -47,6 +47,7 @@ public class VisitanteService implements IVisitanteService {
         dto.setPrimerApellido(visitante.getPrimerApellido());
         dto.setCarrera(visitante.getCarrera());
         dto.setTelefono(visitante.getTelefono());
+        dto.setTipo(visitante.getTipo());
         return dto;
     }
 
@@ -57,6 +58,7 @@ public class VisitanteService implements IVisitanteService {
         visitante.setPrimerApellido(dto.getPrimerApellido());
         visitante.setCarrera(dto.getCarrera());
         visitante.setTelefono(dto.getTelefono());
+        visitante.setTipo(dto.getTipo());
         return visitante;
     }
 
