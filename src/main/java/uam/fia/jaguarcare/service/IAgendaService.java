@@ -1,8 +1,6 @@
 package uam.fia.jaguarcare.service;
 
 import uam.fia.jaguarcare.dto.AgendaDTO;
-import uam.fia.jaguarcare.dto.UsuarioDTO;
-import uam.fia.jaguarcare.model.Agenda;
 
 import java.util.List;
 import java.util.Optional;

@@ -12,9 +12,6 @@ public class AgendaDTO {
 
     private String idAgenda;
     private Visitante visitante;
-
     private Date fecha;
-
     private String hora;
-
     private String especialidad;}

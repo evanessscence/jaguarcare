@@ -7,11 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import uam.fia.jaguarcare.dto.UsuarioDTO;
-import uam.fia.jaguarcare.model.Usuario;
-import uam.fia.jaguarcare.repository.IUsuarioRepository;
-import uam.fia.jaguarcare.service.IUsuarioService;
-import uam.fia.jaguarcare.service.IVisitanteService;
+import uam.fia.jaguarcare.dto.RecepcionistaDTO;
+import uam.fia.jaguarcare.repository.IRecepcionistaRepository;
+import uam.fia.jaguarcare.service.IRecepcionistaService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,21 +19,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/usuario")
 @CrossOrigin("*")
-public class UsuarioController {
+public class RecepcionistaController {
 
     @Autowired
-    private IUsuarioService usuarioService;
+    private IRecepcionistaService recepcionistaService;
     @Autowired
-    private IUsuarioRepository repoUsuario;
+    private IRecepcionistaRepository repoUsuario;
 
     @GetMapping("/login")
     public Integer getLogin(@RequestParam("cedula") String cedula,
                             @RequestParam("password") String password) {
-        return usuarioService.getLogin(cedula,password);
+        return recepcionistaService.getLogin(cedula,password);
     }
     @GetMapping("/all")
-    public ResponseEntity<List<UsuarioDTO>> getAll() {
-        List<UsuarioDTO> list = usuarioService.getAll();
+    public ResponseEntity<List<RecepcionistaDTO>> getAll() {
+        List<RecepcionistaDTO> list = recepcionistaService.getAll();
         if (list.isEmpty()) {
             return ResponseEntity.badRequest().body(list);
         }
@@ -43,26 +41,26 @@ public class UsuarioController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestBody @Valid UsuarioDTO usuarioDTO) {
-        usuarioService.create(usuarioDTO);
+    public ResponseEntity<String> create(@RequestBody @Valid RecepcionistaDTO recepcionistaDTO) {
+        recepcionistaService.create(recepcionistaDTO);
         return ResponseEntity.ok("Usuario creado");
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody @Valid UsuarioDTO usuarioDTO) {
-        usuarioService.create(usuarioDTO);  // Assuming an update method is available
+    public ResponseEntity<String> update(@RequestBody @Valid RecepcionistaDTO recepcionistaDTO) {
+        recepcionistaService.create(recepcionistaDTO);  // Assuming an update method is available
         return ResponseEntity.ok("Usuario actualizado");
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable String id) {
-        usuarioService.delete(id);
+        recepcionistaService.delete(id);
         return ResponseEntity.ok("Usuario eliminado");
     }
 
     @GetMapping("/search/{id}")
-    public ResponseEntity<Optional<UsuarioDTO>> find(@PathVariable String id) {
-        Optional<UsuarioDTO> usuario = usuarioService.find(id);
+    public ResponseEntity<Optional<RecepcionistaDTO>> find(@PathVariable String id) {
+        Optional<RecepcionistaDTO> usuario = recepcionistaService.find(id);
         return ResponseEntity.ok(usuario);
     }
 

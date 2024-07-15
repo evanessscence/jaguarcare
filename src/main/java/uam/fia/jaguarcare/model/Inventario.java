@@ -13,12 +13,19 @@ public class Inventario extends Identificable{
 
 	@Column(length=4)
 	int anyo;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
     private Medicamento medicamentocomprado;
-    
+
+	@Column(name="cantidadmed_comprada")
 	private Integer cantidadmedComprada;
 
+
+	@Column(name="cantidadinsumo_comprada")
+	private Integer cantidadinsumoComprada;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Insumo insumocomprado;
 
 }
 

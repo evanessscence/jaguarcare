@@ -53,7 +53,7 @@ public class VisitaService implements IVisitaService {
         dto.setDiagnostico(visita.getDiagnostico());
         dto.setCantDispensada(visita.getCantidadDispensada());
         dto.setSintomatologiaId(visita.getSintomatologia());
-        dto.setMedicamento(visita.getMedicamentos());
+        dto.setMedicamento(visita.getMedicamento());
         dto.setDestino(visita.getDestino());
         return dto;
     }
@@ -69,14 +69,14 @@ public class VisitaService implements IVisitaService {
         visita.setDiagnostico(dto.getDiagnostico());
         visita.setCantidadDispensada(dto.getCantDispensada());
         visita.setSintomatologia(dto.getSintomatologiaId());
-        visita.setMedicamentos(dto.getMedicamento());
+        visita.setMedicamento(dto.getMedicamento());
         visita.setDestino(dto.getDestino());
         return visita;
     }
 
     private void actualizarCantidadesDeMedicamentos(Visita visita) {
-        if (visita.getMedicamentos() != null) {
-            for (Medicamento medicamento : visita.getMedicamentos()) {
+        if (visita.getMedicamento() != null) {
+            for (Medicamento medicamento : visita.getMedicamento()) {
                 Integer cantidadDispensada = visita.getCantidadDispensada();
                     medicamento.setCantidadDisponible(medicamento.getCantidadDisponible() - cantidadDispensada);
                     medicamento.verificarCantidadMinima();  // Verifica si es necesario un refill

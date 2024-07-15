@@ -5,19 +5,17 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Entity
 @Data
-public class Usuario {
+public class Recepcionista {
     @Id
     @NotBlank(message = "El CIF no puede estar vacío")
     private String idrecepcionista;
 
-    @Column(length = 50)
-    String Cedula;
+    @Column
+    String cedula;
 
-    @Column(length=50)
+    @Column
     String name;
 
     @Hidden

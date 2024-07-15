@@ -1,11 +1,9 @@
 package uam.fia.jaguarcare.dto;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Data;
 import uam.fia.jaguarcare.model.Medicamento;
 import uam.fia.jaguarcare.model.Sintomatologia;
-import uam.fia.jaguarcare.model.Usuario;
+import uam.fia.jaguarcare.model.Recepcionista;
 import uam.fia.jaguarcare.model.Visitante;
 import uam.fia.jaguarcare.model.enums.Destino;
 
@@ -20,7 +18,7 @@ public class VisitaDTO {
     private String horadeSalida;
     private Destino destino;
     private Visitante visitanteId;
-    private Usuario recepcionista;
+    private Recepcionista recepcionista;
     private String diagnostico;
     private Integer cantDispensada;
     private Sintomatologia sintomatologiaId;

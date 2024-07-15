@@ -16,20 +16,20 @@ public class Agenda {
 	@Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid") //Universally unique identifier
-	@Column(length=10)
+	@Column(length=50)
     @Hidden
     private String idAgenda;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     private Visitante visitante;
 
-	@Column(length=10)
+	@Column(length=50)
 	private Date fecha;
 	
-	@Column(length=10)
+	@Column(length=50)
 	private String hora;
 	
-	@Column(length=20)
+	@Column(length=50)
 	private String especialidad;
 	// Este campo podría ser un enum, pero no conozco las especialidades
 }
