@@ -17,7 +17,7 @@ public class VisitaDTO {
     private String horadeEntrada;
     private String horadeSalida;
     private Destino destino;
-    private Visitante visitanteId;
+    private Visitante visitante;
     private Recepcionista recepcionista;
     private String diagnostico;
     private Integer cantDispensada;
